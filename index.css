@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.formDiv {
+    width: 40%;
+    padding: 1em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.tableDiv {
+    width: 40%;
+    padding: 1.5em;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid aquamarine;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+}
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
