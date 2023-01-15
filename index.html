@@ -19,7 +19,7 @@
             </form>
         </div>
         <div class="tableDiv">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="table">
                 <thead class="thead-class">
                 <tr>
                     <th scope="col">Pays</th>
@@ -29,7 +29,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr id="firstRow">
                     <td>France</td>
                     <td>Reims</td>
                     <td>Champagne-ardenne</td>
@@ -38,17 +38,39 @@
                 </tbody>
             </table>
         </div>
-
-        <script type="text/javascript">
-            var client = new XMLHttpRequest();
-            client.open("GET", "http://api.zippopotam.us/us/90210", true);
-            client.onreadystatechange = function() {
-                if(client.readyState === 4) {
-                    alert(client.responseText);
+        <script>
+            const form = document.getElementById('form');
+            form.addEventListener("submit", envoiForm);
+            function envoiForm(event) {
+                const code = this.elements.code.value;
+                const client = new XMLHttpRequest();
+                client.open("GET", "http://api.zippopotam.us/fr/" + code, true);
+                client.onreadystatechange = function() {
+                    if(client.readyState === 4) {
+                        const resultCode = JSON.parse(client.responseText);
+                        ajouteLigne(resultCode.country, resultCode.places[0]['place name'], resultCode.places[0]['state'], resultCode['post code'])
+                        console.log(resultCode);
+                    }
                 };
-            };
+                client.send();
+                event.preventDefault();
+            }
 
-            client.send();
+            function ajouteLigne(country, town, state, code) {
+                let tableRef = document.getElementById('table');
+
+                let newRow = tableRef.insertRow();
+                let cellCountry = newRow.insertCell();
+                let cellTown = newRow.insertCell();
+                let cellState = newRow.insertCell();
+                let cellCode = newRow.insertCell();
+                cellCountry.appendChild(document.createTextNode(country));
+                cellTown.appendChild(document.createTextNode(town));
+                cellState.appendChild(document.createTextNode(state));
+                cellCode.appendChild(document.createTextNode(code));
+            }
+            //todo: ajout des vérification avant requête + retour visuel
+            //todo: extraction dans un fichier externe
         </script>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/jquery.localScroll.min.js"></script>

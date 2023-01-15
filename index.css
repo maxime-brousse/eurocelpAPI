@@ -5,7 +5,7 @@ body {
     flex-direction: column;
 }
 .formDiv {
-    width: 40%;
+    width: 60%;
     padding: 1em;
     display: flex;
     justify-content: space-around;
@@ -13,7 +13,7 @@ body {
     flex-direction: column;
 }
 .tableDiv {
-    width: 40%;
+    width: 60%;
     padding: 1.5em;
     justify-content: space-around;
     align-items: center;
