@@ -1,13 +1,13 @@
 function envoiForm(event) {
-    document.getElementById('error').textContent = '';
+    const error = document.getElementById('error');
+    error.textContent = '';
     const code = this.elements.code.value;
-    if (code) {
+    if (verification(code, error)) {
         const client = new XMLHttpRequest();
         client.open("GET", "http://api.zippopotam.us/fr/" + code, true);
         client.onreadystatechange = function() {
             if (client.status === 404) {
-                document.getElementById('error').appendChild(document.createTextNode("Ce code postal n'exite pas"));
-                console.log(client.status);
+                document.getElementById('error').appendChild(document.createTextNode("Ce code postal n'existe pas"));
                 client.abort();
             }
             if(client.readyState === 4) {
@@ -16,8 +16,6 @@ function envoiForm(event) {
             }
         };
         client.send();
-    } else {
-        document.getElementById('error').appendChild(document.createTextNode("Le code postal est vide"));
     }
     event.preventDefault();
 }

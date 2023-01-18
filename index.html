@@ -8,14 +8,16 @@
         <link rel="stylesheet" href="index.css">
         <script type="text/javascript" src="js/AjouteLigne.js"></script>
         <script type="text/javascript" src="js/Requete.js"></script>
+        <script type="text/javascript" src="js/verification.js"></script>
     </head>
     <body>
         <div class="formDiv">
             <h1 class="h3">Code postal - Trouver votre ville en 1 clic</h1>
             <form action="index.html" method="post" id="form" class="form">
                 <div class="form-group">
-                    <label for="code">Veuillez renseigner un code postal valide</label>
-                    <input class="form-control" type="text" name="code" placeholder="Code postal" id="code" pattern="([0-9])+" required/>
+                    <label for="code">Veuillez renseigner un code postal valide (5 chiffres)</label>
+                    <p id="error" class="error"></p>
+                    <input class="form-control" type="text" name="code" placeholder="Code postal" id="code" pattern="\d{5}" required/>
                 </div>
                 <input type="submit" value="envoyer" class="btn btn-primary">
             </form>
